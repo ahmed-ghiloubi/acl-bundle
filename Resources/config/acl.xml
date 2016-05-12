@@ -10,6 +10,7 @@
         <parameter key="projecta_acl.ace.objectmanager.class">ProjectA\Bundle\AclBundle\Security\Acl\Manager\AceManager\ObjectAceManager</parameter>
         <parameter key="projecta_acl.acl.object_identity_retrieval_strategy.class">ProjectA\Bundle\AclBundle\Security\Acl\Domain\ObjectIdentityRetrievalStrategy</parameter>
         <parameter key="security.acl.collection_cache.class">Symfony\Component\Security\Acl\Domain\AclCollectionCache</parameter>
+        <parameter key="msi.twig.security.extension.class">ProjectA\Bundle\AclBundle\Twig\Extension\SecurityExtension</parameter>
     </parameters>
 
     <services>
@@ -51,6 +52,11 @@
             <argument type="service" id="security.acl.provider" />
             <argument type="service" id="security.acl.object_identity_retrieval_strategy" />
             <argument type="service" id="security.acl.security_identity_retrieval_strategy" />
+        </service>
+
+        <!-- twig class identity -->
+        <service id="msi.twig.security.extension" class="%msi.twig.security.extension.class%">
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>
