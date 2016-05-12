@@ -13,7 +13,8 @@ namespace ProjectA\Bundle\AclBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * EventSubscriber for doctrine that removes acl entries on
@@ -25,8 +26,10 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  *
  * @author Daniel Tschinder <daniel@tschinder.de>
  */
-class DoctrineSubscriber extends ContainerAware implements EventSubscriber
+class DoctrineSubscriber implements ContainerAwareInterface, EventSubscriber
 {
+    use ContainerAwareTrait;
+
     /**
      * @var bool
      */
