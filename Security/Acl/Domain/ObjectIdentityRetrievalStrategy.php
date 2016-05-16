@@ -37,4 +37,26 @@ class ObjectIdentityRetrievalStrategy extends BaseObjectIdentityRetrievalStrateg
 
         return parent::getObjectIdentity($domainObject);
     }
+    
+    /**
+     * 
+     * @param ObjectIdentityInterface|string $domainObject
+     * @return ObjectIdentityInterface|ObjectIdentity
+     * @throws \InvalidArgumentException
+     */
+    public static function getClassIdentity($domainObject)
+    {
+        if ($domainObject instanceof ObjectIdentityInterface) {
+            return $domainObject;
+        } elseif (is_string($domainObject)) {
+            if (!class_exists($domainObject)) {
+                throw new \InvalidArgumentException(sprintf('Could not load class "%s"', $domainObject));
+            }
+
+            return new ObjectIdentity('class', $domainObject);
+        } else {
+            throw new \InvalidArgumentException;
+        }
+        
+    }
 }
